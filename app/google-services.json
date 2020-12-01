@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "11350210519",
+    "firebase_url": "https://videoconference-9d8fa.firebaseio.com",
+    "project_id": "videoconference-9d8fa",
+    "storage_bucket": "videoconference-9d8fa.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:11350210519:android:3a2081ecaa9f9734c33d92",
+        "android_client_info": {
+          "package_name": "com.example.videoconference"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "11350210519-009k9rhuoi2ncdpe7pns4hm9sprdudvn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBbYTlhzKuQrXWSnm-KJNzbUycah7L1CC4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "11350210519-009k9rhuoi2ncdpe7pns4hm9sprdudvn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

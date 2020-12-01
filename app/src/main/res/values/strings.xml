@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">VideoConference</string>
+    <string name="welcome_to">Welcome to</string>
+    <string name="video_conference">Video Meeting| Conference App</string>
+    <string name="sign_in_to_your_account">Sign in to your account</string>
+    <string name="email">Email</string>
+    <string name="email_gmail_com">email@gmail.com</string>
+    <string name="password">Password</string>
+    <string name="password_hint">• • • • • • • • • •</string>
+    <string name="signin">Sign In</string>
+    <string name="don_t_have_an_account">Don\'t Have an Account?</string>
+    <string name="signup">Sign Up</string>
+    <string name="enter_he_below_details_to_create_a_new_account">Enter he below details to create a new account</string>
+    <string name="john">John</string>
+    <string name="last_name">Last Name</string>
+    <string name="doe">Doe</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="already_have_an_account">Already Have an account?</string>
+    <string name="first_name">First Name</string>
+    <string name="sign_out">Sign Out</string>
+</resources>
