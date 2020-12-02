@@ -86,6 +86,7 @@ public class SignInActivity extends AppCompatActivity {
                             preferenceManager.putString(Constants.KEY_USER_ID, documentSnapshot.getId());
                             preferenceManager.putString(Constants.KEY_FIRST_NAME, documentSnapshot.getString(Constants.KEY_FIRST_NAME));
                             preferenceManager.putString(Constants.KEY_LAST_NAME, documentSnapshot.getString(Constants.KEY_LAST_NAME));
+                            preferenceManager.putString(Constants.KEY_EMAIL, documentSnapshot.getString(Constants.KEY_EMAIL));
                             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                             startActivity(intent);

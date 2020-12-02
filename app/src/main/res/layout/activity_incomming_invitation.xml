@@ -13,6 +13,7 @@
         android:layout_marginTop="@dimen/_50sdp"
         android:contentDescription="@string/app_name"
         app:tint="@color/colorTextIcons"
+        android:src="@drawable/ic_audio"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
