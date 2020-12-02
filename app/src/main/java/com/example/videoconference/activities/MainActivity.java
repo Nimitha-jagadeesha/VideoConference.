@@ -1,8 +1,8 @@
 package com.example.videoconference.activities;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,13 +17,10 @@ import com.example.videoconference.listners.UsersListeners;
 import com.example.videoconference.models.User;
 import com.example.videoconference.utilities.Constants;
 import com.example.videoconference.utilities.PreferenceManager;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.iid.FirebaseInstanceId;
 
 import java.util.ArrayList;
@@ -36,7 +33,7 @@ public class MainActivity extends AppCompatActivity implements UsersListeners {
     private List<User> users;
     private UsersAdaptors usersAdaptors;
     private TextView textViewErrorMessage;
-    private ProgressBar usersProgressBar;
+    private SwipeRefreshLayout swipeRefreshLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,25 +58,27 @@ public class MainActivity extends AppCompatActivity implements UsersListeners {
         });
         RecyclerView useRecyclerView = findViewById(R.id.usersRecyclerView);
         textViewErrorMessage = findViewById(R.id.textErrorMessage);
-        usersProgressBar = findViewById(R.id.userProgressBar);
         users= new ArrayList<>();
-        usersAdaptors= new UsersAdaptors(users);
+        usersAdaptors= new UsersAdaptors(users,this);
         useRecyclerView.setAdapter(usersAdaptors);
+        swipeRefreshLayout = findViewById(R.id.swipeRefresh);
+        swipeRefreshLayout.setOnRefreshListener(this::getUsers);
 
         getUsers();
     }
 
     private void getUsers()
     {
-        usersProgressBar.setVisibility(View.VISIBLE);
+        swipeRefreshLayout.setRefreshing(true);
         FirebaseFirestore database = FirebaseFirestore.getInstance();
         database.collection(Constants.KEY_COLLECTION_USERS)
                 .get()
                 .addOnCompleteListener(task -> {
-                    usersProgressBar.setVisibility(View.GONE);
+                    swipeRefreshLayout.setRefreshing(false);
                     String myUserId = preferenceManager.getString(Constants.KEY_USER_ID);
                     if(task.isSuccessful()&&task.getResult()!=null)
                     {
+                        users.clear();
                             for(QueryDocumentSnapshot documentSnapshot: task.getResult())
                             {
                                 if(myUserId.equals(documentSnapshot.getId()))
@@ -108,6 +107,7 @@ public class MainActivity extends AppCompatActivity implements UsersListeners {
                         textViewErrorMessage.setVisibility(View.VISIBLE);
                     }
                 });
+
     }
 
     private void sendFCMTokenToDatabase(String token){
@@ -140,11 +140,33 @@ public class MainActivity extends AppCompatActivity implements UsersListeners {
 
     @Override
     public void initiateVideoMeeting(User user) {
-        
+        if(user.token == null||user.token.trim().isEmpty())
+        {
+            Toast.makeText(this, user.firstName+" "+user.lastName+"is not available for meeting", Toast.LENGTH_SHORT).show();
+        }
+        else
+        {
+            Intent intent = new Intent(getApplicationContext(), OutgoingInvitationActivity.class);
+            intent.putExtra("user",user);
+            intent.putExtra("type","video");
+            startActivity(intent);
+
+        }
     }
 
     @Override
     public void initiateAudioMeeting(User user) {
+        if(user.token == null||user.token.trim().isEmpty())
+        {
+            Toast.makeText(this, user.firstName+" "+user.lastName+"is not available for meeting", Toast.LENGTH_SHORT).show();
+        }
+        else
+        {
+            Intent intent = new Intent(getApplicationContext(), OutgoingInvitationActivity.class);
+            intent.putExtra("user",user);
+            intent.putExtra("type","audio");
+            startActivity(intent);
+        }
 
     }
 }

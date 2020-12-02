@@ -18,4 +18,6 @@
     <string name="already_have_an_account">Already Have an account?</string>
     <string name="first_name">First Name</string>
     <string name="sign_out">Sign Out</string>
+    <string name="incomming_meeting_invitation">Incomming Meeting Invitation</string>
+    <string name="sending_invitation">Sending Invitation</string>
 </resources>
